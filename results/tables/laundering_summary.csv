@@ -1,0 +1,21 @@
+,,,f1,f1,recall,recall,fpr,fpr
+,,,mean,std,mean,std,mean,std
+condition,rule,variant,,,,,,
+none,fused,D1: Content only,0.856,0.008,0.859,0.019,0.075,0.006
+none,content veto,D1: Content only,0.856,0.008,0.859,0.019,0.075,0.006
+prov,fused,D1: Content only,0.856,0.008,0.859,0.019,0.075,0.006
+prov,content veto,D1: Content only,0.856,0.008,0.859,0.019,0.075,0.006
+full,fused,D1: Content only,0.845,0.013,0.84,0.028,0.075,0.006
+full,content veto,D1: Content only,0.845,0.013,0.84,0.028,0.075,0.006
+none,fused,D2: Content + provenance,0.87,0.009,0.87,0.023,0.065,0.007
+none,content veto,D2: Content + provenance,0.875,0.006,0.881,0.018,0.067,0.007
+prov,fused,D2: Content + provenance,0.868,0.009,0.864,0.019,0.065,0.007
+prov,content veto,D2: Content + provenance,0.869,0.007,0.87,0.015,0.067,0.007
+full,fused,D2: Content + provenance,0.856,0.012,0.844,0.028,0.065,0.007
+full,content veto,D2: Content + provenance,0.856,0.011,0.848,0.026,0.067,0.007
+none,fused,D3: Content + prov. + network,0.875,0.009,0.878,0.02,0.066,0.006
+none,content veto,D3: Content + prov. + network,0.879,0.005,0.889,0.016,0.068,0.006
+prov,fused,D3: Content + prov. + network,0.864,0.007,0.859,0.018,0.066,0.006
+prov,content veto,D3: Content + prov. + network,0.864,0.006,0.862,0.017,0.068,0.006
+full,fused,D3: Content + prov. + network,0.853,0.015,0.84,0.032,0.066,0.006
+full,content veto,D3: Content + prov. + network,0.852,0.015,0.842,0.031,0.068,0.006

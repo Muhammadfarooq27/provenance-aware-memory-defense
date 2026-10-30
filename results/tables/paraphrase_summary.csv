@@ -1,0 +1,6 @@
+,f1,f1,auc,auc,recall,recall,fpr,fpr
+,mean,std,mean,std,mean,std,mean,std
+variant,,,,,,,,
+D1: Content only,0.845,0.013,0.966,0.002,0.84,0.028,0.075,0.006
+D2: Content + provenance,0.86,0.009,0.962,0.005,0.851,0.022,0.065,0.007
+D3: Content + prov. + network,0.867,0.011,0.968,0.003,0.864,0.024,0.066,0.006

@@ -1,0 +1,155 @@
+DATASET: 5369 entries | 1821 poisoned
+label                          0    1
+source               split           
+longmemeval          test    411    0
+                     train  1915    0
+                     val     411    0
+memshield            test    126   48
+                     train   567  222
+                     val     118   51
+poisonedrag_hotpotqa test      0   80
+                     train     0  325
+                     val       0   95
+poisonedrag_msmarco  test      0   90
+                     train     0  335
+                     val       0   75
+poisonedrag_nq       test      0   55
+                     train     0  390
+                     val       0   55
+PoisonedRAG questions split across splits: 0
+
+====================================================================================================
+TABLE 2 - detectors at medium overlap (mean/std over 5 seeds)
+  (table2_detectors.csv)
+====================================================================================================
+                               accuracy                  f1                 auc                 fpr           signed_poison_recall           f1_memshield_only           auc_memshield_only          
+                                   mean       std      mean       std      mean       std      mean       std                 mean       std              mean       std               mean       std
+variant                                                                                                                                                                                              
+D1: Content only               0.902716  0.004485  0.856132  0.008127  0.967560  0.001772  0.075233  0.005976             0.841784  0.060955          0.631199  0.015374           0.860549  0.014610
+D2: Content + provenance       0.912840  0.005353  0.870460  0.009354  0.962549  0.003123  0.065177  0.007331             0.864778  0.078124          0.667340  0.030681           0.873214  0.015433
+D3: Content + prov. + network  0.915309  0.005209  0.874700  0.008809  0.968154  0.001932  0.065549  0.006370             0.853905  0.074642          0.674597  0.027185           0.891369  0.018188
+
+F1 / AUC / FPR / recall / memshield F1 by overlap (mean over seeds)
+                                          f1    auc    fpr  recall  f1_memshield_only  signed_poison_recall
+overlap variant                                                                                            
+low     D1: Content only               0.856  0.968  0.075   0.859              0.631                 0.875
+        D2: Content + provenance       0.892  0.971  0.053   0.889              0.709                 0.829
+        D3: Content + prov. + network  0.895  0.975  0.052   0.893              0.720                 0.844
+medium  D1: Content only               0.856  0.968  0.075   0.859              0.631                 0.842
+        D2: Content + provenance       0.870  0.963  0.065   0.870              0.667                 0.865
+        D3: Content + prov. + network  0.875  0.968  0.066   0.878              0.675                 0.854
+high    D1: Content only               0.856  0.968  0.075   0.859              0.631                 0.881
+        D2: Content + provenance       0.863  0.964  0.073   0.867              0.639                 0.903
+        D3: Content + prov. + network  0.868  0.965  0.071   0.875              0.653                 0.910
+
+====================================================================================================
+BASELINES (threshold, LLM judge, D3 on same 200)
+  (baselines.csv)
+====================================================================================================
+                        method  accuracy        f1       fpr    recall       auc  n_test   median_ms      p95_ms    model_mb  failed_requests
+0          Embedding threshold  0.833333  0.781906  0.193669  0.886447  0.893268     810         NaN         NaN         NaN              NaN
+1  LLM-as-judge (qwen2.5:1.5b)  0.690000  0.630952  0.365672  0.803030       NaN     200  3332.94295  5367.44378  986.061892              0.0
+2   D3 on the same 200 entries  0.920000  0.876923  0.052239  0.863636  0.969923     200         NaN         NaN         NaN              NaN
+
+SYNONYM ATTACK (mean/std)
+                                   f1           auc        recall           fpr       
+                                mean    std   mean    std   mean    std   mean    std
+variant                                                                              
+D1: Content only               0.850  0.011  0.967  0.001  0.848  0.026  0.075  0.006
+D2: Content + provenance       0.867  0.009  0.960  0.004  0.863  0.024  0.065  0.007
+D3: Content + prov. + network  0.875  0.010  0.967  0.003  0.878  0.020  0.066  0.006
+
+====================================================================================================
+LLM PARAPHRASE
+  (paraphrase_summary.csv)
+====================================================================================================
+                                  f1           auc        recall           fpr       
+                                mean    std   mean    std   mean    std   mean    std
+variant                                                                              
+D1: Content only               0.845  0.013  0.966  0.002  0.840  0.028  0.075  0.006
+D2: Content + provenance       0.860  0.009  0.962  0.005  0.851  0.022  0.065  0.007
+D3: Content + prov. + network  0.867  0.011  0.968  0.003  0.864  0.024  0.066  0.006
+
+====================================================================================================
+TWO THRESHOLDS
+  (two_thresholds.csv)
+====================================================================================================
+                         variant  t_low  t_high  poison_accepted_pct  clean_recalled_pct  poison_quarantined_pct  clean_quarantined_pct  poison_recalled_pct  clean_accepted_pct  quarantine_share_pct
+0               D1: Content only    0.5     0.5                14.07                7.52                    0.00                   0.00                85.93               92.48                  0.00
+1               D1: Content only    0.3     0.7                 7.77                5.03                   14.43                   5.03                77.80               89.94                  8.20
+2               D1: Content only    0.2     0.8                 4.40                3.54                   28.06                   8.68                67.55               87.78                 15.21
+3  D3: Content + prov. + network    0.5     0.5                12.23                6.55                    0.00                   0.00                87.77               93.45                  0.00
+4  D3: Content + prov. + network    0.3     0.7                 6.74                4.06                   15.16                   5.51                78.10               90.43                  8.77
+5  D3: Content + prov. + network    0.2     0.8                 4.98                2.38                   27.33                  11.58                67.69               86.03                 16.89
+
+====================================================================================================
+RECALL (25 agents)
+  (recall_summary.csv)
+====================================================================================================
+                           mode  detected_at  steps_to_clear  peak_holders  final_holders
+0                Without recall          NaN             NaN        25.000           25.0
+1  With recall (detection 0.88)        1.444           1.728         3.608            0.0
+2  With recall (detection 0.25)        3.114           2.646         8.598            0.0
+
+====================================================================================================
+RECALL AT SCALE
+  (recall_scale.csv)
+====================================================================================================
+   agents                          mode  detected_at  steps_to_clear  peak_holders  final_holders  recall_messages  peak_pct_of_mesh  messages_per_agent
+0      25                Without recall          NaN             NaN         25.00           25.0              0.0            100.00                 0.0
+1      25  With recall (detection 0.88)         1.44            1.73          3.61            0.0            100.0             14.43                 4.0
+2      25  With recall (detection 0.25)         3.11            2.65          8.60            0.0            100.0             34.39                 4.0
+3      50                Without recall          NaN             NaN         50.00           50.0              0.0            100.00                 0.0
+4      50  With recall (detection 0.88)         1.41            2.22          4.05            0.0            200.0              8.10                 4.0
+5      50  With recall (detection 0.25)         3.26            3.54         10.99            0.0            200.0             21.98                 4.0
+6     100                Without recall          NaN             NaN        100.00          100.0              0.0            100.00                 0.0
+7     100  With recall (detection 0.88)         1.43            2.72          4.93            0.0            400.0              4.93                 4.0
+8     100  With recall (detection 0.25)         3.03            4.06         13.49            0.0            400.0             13.49                 4.0
+
+====================================================================================================
+LAUNDERING
+  (laundering_summary.csv)
+====================================================================================================
+                                                         f1        recall           fpr       
+                                                       mean    std   mean    std   mean    std
+condition rule         variant                                                                
+none      fused        D1: Content only               0.856  0.008  0.859  0.019  0.075  0.006
+          content veto D1: Content only               0.856  0.008  0.859  0.019  0.075  0.006
+prov      fused        D1: Content only               0.856  0.008  0.859  0.019  0.075  0.006
+          content veto D1: Content only               0.856  0.008  0.859  0.019  0.075  0.006
+full      fused        D1: Content only               0.845  0.013  0.840  0.028  0.075  0.006
+          content veto D1: Content only               0.845  0.013  0.840  0.028  0.075  0.006
+none      fused        D2: Content + provenance       0.870  0.009  0.870  0.023  0.065  0.007
+          content veto D2: Content + provenance       0.875  0.006  0.881  0.018  0.067  0.007
+prov      fused        D2: Content + provenance       0.868  0.009  0.864  0.019  0.065  0.007
+          content veto D2: Content + provenance       0.869  0.007  0.870  0.015  0.067  0.007
+full      fused        D2: Content + provenance       0.856  0.012  0.844  0.028  0.065  0.007
+          content veto D2: Content + provenance       0.856  0.011  0.848  0.026  0.067  0.007
+none      fused        D3: Content + prov. + network  0.875  0.009  0.878  0.020  0.066  0.006
+          content veto D3: Content + prov. + network  0.879  0.005  0.889  0.016  0.068  0.006
+prov      fused        D3: Content + prov. + network  0.864  0.007  0.859  0.018  0.066  0.006
+          content veto D3: Content + prov. + network  0.864  0.006  0.862  0.017  0.068  0.006
+full      fused        D3: Content + prov. + network  0.853  0.015  0.840  0.032  0.066  0.006
+          content veto D3: Content + prov. + network  0.852  0.015  0.842  0.031  0.068  0.006
+
+====================================================================================================
+END-TO-END
+  (e2e_summary.csv)
+====================================================================================================
+                        condition  questions  failed  ASR_pct  accuracy_pct  avg_poison_in_top5  poison_removed_pct  clean_removed_pct
+0                     A no attack        100       0     18.0          24.0                0.00                 NaN                NaN
+1            B attack, no defense        100       0     99.0           2.0                5.00                 NaN                NaN
+2                   C attack + D3        100       0     48.0          12.0                2.39                81.6               6.33
+3    D attack + D1 (content only)        100       0     48.0          14.0                2.62                75.8               6.70
+4  E attack + embedding threshold        100       0     37.0          16.0                2.02                89.0              18.81
+5     F attack + D3 + copy recall        100       0     34.0          20.0                1.42                91.6               6.33
+6     G attack + D1 + copy recall        100       0     40.0          15.0                2.37                80.2               6.70
+
+====================================================================================================
+EDGE COST (not rerun)
+  (table3_edge.csv)
+====================================================================================================
+                         device  threads  detector_ms_median  detector_ms_p95   model_mb   sign_ms  verify_ms  envelope_bytes
+0  Intel Core i5-8365U (1 core)        1           31.256450        81.051620  91.456358  0.046900   0.131500             723
+1       Raspberry Pi 5 (1 core)        1           42.822980        86.743487  91.456358  0.043965   0.142098             723
+2      Raspberry Pi 5 (4 cores)        4           45.032656        77.776754  91.456358  0.043927   0.140987             723

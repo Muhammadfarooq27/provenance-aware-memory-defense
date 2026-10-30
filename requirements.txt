@@ -1,0 +1,12 @@
+pandas
+numpy
+scikit-learn
+networkx
+matplotlib
+joblib
+cryptography
+nltk
+requests
+datasets
+torch
+sentence-transformers

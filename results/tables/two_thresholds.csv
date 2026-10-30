@@ -1,0 +1,7 @@
+variant,t_low,t_high,poison_accepted_pct,clean_recalled_pct,poison_quarantined_pct,clean_quarantined_pct,poison_recalled_pct,clean_accepted_pct,quarantine_share_pct
+D1: Content only,0.5,0.5,14.07,7.52,0.0,0.0,85.93,92.48,0.0
+D1: Content only,0.3,0.7,7.77,5.03,14.43,5.03,77.8,89.94,8.2
+D1: Content only,0.2,0.8,4.4,3.54,28.06,8.68,67.55,87.78,15.21
+D3: Content + prov. + network,0.5,0.5,12.23,6.55,0.0,0.0,87.77,93.45,0.0
+D3: Content + prov. + network,0.3,0.7,6.74,4.06,15.16,5.51,78.1,90.43,8.77
+D3: Content + prov. + network,0.2,0.8,4.98,2.38,27.33,11.58,67.69,86.03,16.89

@@ -1,0 +1,4 @@
+mode,detected_at,steps_to_clear,peak_holders,final_holders
+Without recall,,,25.0,25.0
+With recall (detection 0.88),1.444,1.728,3.608,0.0
+With recall (detection 0.25),3.114,2.646,8.598,0.0

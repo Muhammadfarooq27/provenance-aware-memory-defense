@@ -1,0 +1,2 @@
+device,model,n,failed,median_ms,p95_ms,model_mb
+Raspberry Pi 5,qwen2.5:1.5b,0,20,,,986.061892

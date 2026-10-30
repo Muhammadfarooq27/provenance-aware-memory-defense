@@ -1,0 +1,8 @@
+condition,questions,failed,ASR_pct,accuracy_pct,avg_poison_in_top5,poison_removed_pct,clean_removed_pct
+A no attack,100,0,18.0,24.0,0.0,,
+"B attack, no defense",100,0,99.0,2.0,5.0,,
+C attack + D3,100,0,48.0,12.0,2.39,81.6,6.33
+D attack + D1 (content only),100,0,48.0,14.0,2.62,75.8,6.7
+E attack + embedding threshold,100,0,37.0,16.0,2.02,89.0,18.81
+F attack + D3 + copy recall,100,0,34.0,20.0,1.42,91.6,6.33
+G attack + D1 + copy recall,100,0,40.0,15.0,2.37,80.2,6.7
