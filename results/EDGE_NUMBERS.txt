@@ -1,0 +1,23 @@
+Edge cost of the EngraMesh detector (D3), one CPU core per device  (Table 3 of the paper)
+=====================================================================================
+                          Laptop      Raspberry Pi 5   Jetson Orin Nano   LLM judge (laptop)
+Latency, median (ms)      31.3        42.8             134.3              3,333
+Latency, p95 (ms)         81.1        86.7             230.5              5,367
+Model size (MB)           91          91               91                 986
+Peak memory (MB)          517         1,023 (a)        473                1,190
+Energy (J/entry)          0.43        0.14             0.12               22.5
+Envelope (bytes/entry)    723         723              723                n/a
+Sign + verify (ms)        0.18        0.19             0.24               n/a
+
+Devices: laptop = Intel Core i5-8365U; Raspberry Pi 5 (8 GB); Jetson Orin Nano 8 GB
+(Seeed reComputer J3011, JetPack 5, 15-W mode, GPU not used). LLM judge = qwen2.5:1.5b via Ollama.
+Peak memory = peak resident memory of the whole process (Python + libraries + model), step 18.
+(a) The Pi used a newer PyTorch build that already takes 879 MB before the model loads;
+    the detector itself adds about 145 MB (laptop about 126 MB, Jetson about 151 MB).
+Energy = (mean active power - mean idle power) x active seconds / entries checked, mean of
+3 runs of 120 s each. Power source: laptop = CPU package power (HWiNFO64, step 19 + 19b);
+Pi = PMIC supply rails (step 20); Jetson = INA3221 total module input VDD_IN (step 21).
+Energy values are estimates from on-board sensors.
+
+Sources: results/tables/table3_edge.csv, results/tables/peak_memory.csv,
+results/tables/edge_energy_summary.csv, results/tables/laptop_energy.csv, results/edge/*

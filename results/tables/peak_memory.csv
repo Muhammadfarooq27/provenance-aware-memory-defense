@@ -1,0 +1,5 @@
+device,method,threads,n,peak_mb,base_mb,processes
+Laptop CPU (1 core),EngraMesh detector (D3),1,200,516.8,390.8,
+Laptop CPU (1 core),LLM judge (qwen2.5:1.5b),ollama default,20,1190.3,,llama-server.exe;ollama.exe
+Raspberry Pi 5 (1 core),EngraMesh detector (D3),1,200,1023.3,878.5,
+Jetson Orin Nano (1 core),EngraMesh detector (D3),1,200,472.7,323.5,

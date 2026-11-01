@@ -1,0 +1,13 @@
+ina3221 sensor: /sys/class/hwmon/hwmon4 channels: [('1', 'VDD_IN'), ('2', 'VDD_CPU_GPU_CV'), ('3', 'VDD_SOC'), ('4', 'ch4')] -> total power from channel 1
+power reading works: 5.83 W right now (VDD_IN); all channels: VDD_IN=5.83 W, VDD_CPU_GPU_CV=0.97 W, VDD_SOC=1.58 W, ch4=9.68 W
+[repeat 1/3] IDLE 120 s  (do not touch the Pi)
+[repeat 1/3] ACTIVE 120 s
+JETSON POWER WINDOW: {'device': 'Jetson Orin Nano (1 core)', 'method': 'EngraMesh detector (D3)', 'threads': 1, 'repeat': 1, 'idle_start': '2026-11-01 07:04:04', 'active_end': '2026-11-01 07:08:04', 'idle_power_W': 5.799, 'active_power_W': 6.704, 'samples_idle': 565, 'samples_active': 563, 'active_seconds': 120.01, 'entries': 797, 'ms_per_entry': 150.6, 'energy_per_entry_J': 0.1363}
+[repeat 2/3] IDLE 120 s  (do not touch the Pi)
+[repeat 2/3] ACTIVE 120 s
+JETSON POWER WINDOW: {'device': 'Jetson Orin Nano (1 core)', 'method': 'EngraMesh detector (D3)', 'threads': 1, 'repeat': 2, 'idle_start': '2026-11-01 07:08:04', 'active_end': '2026-11-01 07:12:04', 'idle_power_W': 5.887, 'active_power_W': 6.713, 'samples_idle': 565, 'samples_active': 564, 'active_seconds': 120.01, 'entries': 815, 'ms_per_entry': 147.2, 'energy_per_entry_J': 0.1216}
+[repeat 3/3] IDLE 120 s  (do not touch the Pi)
+[repeat 3/3] ACTIVE 120 s
+JETSON POWER WINDOW: {'device': 'Jetson Orin Nano (1 core)', 'method': 'EngraMesh detector (D3)', 'threads': 1, 'repeat': 3, 'idle_start': '2026-11-01 07:12:04', 'active_end': '2026-11-01 07:16:04', 'idle_power_W': 5.821, 'active_power_W': 6.437, 'samples_idle': 566, 'samples_active': 564, 'active_seconds': 120.09, 'entries': 830, 'ms_per_entry': 144.7, 'energy_per_entry_J': 0.0891}
+SUMMARY: EngraMesh detector (D3) on Jetson Orin Nano (1 core): energy per entry 0.116 +- 0.024 J over 3 repeats
+appended to jetson_power_windows.csv and jetson_power_samples.csv

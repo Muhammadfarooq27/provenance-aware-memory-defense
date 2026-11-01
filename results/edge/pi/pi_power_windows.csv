@@ -1,0 +1,4 @@
+device,method,threads,repeat,idle_start,active_end,idle_power_W,active_power_W,samples_idle,samples_active,active_seconds,entries,ms_per_entry,energy_per_entry_J
+Raspberry Pi 5 (1 core),EngraMesh detector (D3),1,1,2026-11-01 16:55:09,2026-11-01 16:59:09,1.496,3.389,221,221,120.13,1618,74.2,0.1406
+Raspberry Pi 5 (1 core),EngraMesh detector (D3),1,2,2026-11-01 16:59:09,2026-11-01 17:03:09,1.5,3.373,222,222,120.17,1621,74.1,0.1389
+Raspberry Pi 5 (1 core),EngraMesh detector (D3),1,3,2026-11-01 17:03:09,2026-11-01 17:07:09,1.504,3.387,221,221,120.08,1654,72.6,0.1367

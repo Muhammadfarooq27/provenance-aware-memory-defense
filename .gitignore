@@ -18,3 +18,4 @@ results/final_run_log.txt
 results/logs/*cache*.csv
 results/logs/*answers*.csv
 
+hf_cache/

@@ -1,0 +1,21 @@
+=== 1/2 PEAK MEMORY ===
+Could not reach the Hub (Cannot reach https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2: offline mode is enabled. To disable it, please unset the `HF_HUB_OFFLINE` environment variable.). Using cached commit hash for 'sentence-transformers/all-MiniLM-L6-v2'.
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 7363.32it/s]
+PEAK MEMORY: {'device': 'Raspberry Pi 5 (1 core)', 'method': 'EngraMesh detector (D3)', 'threads': 1, 'n': 200, 'peak_mb': 1023.3, 'base_mb': 878.5}
+appended to peak_memory.csv
+=== 2/2 ENERGY (about 13 minutes) ===
+Could not reach the Hub (Cannot reach https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2: offline mode is enabled. To disable it, please unset the `HF_HUB_OFFLINE` environment variable.). Using cached commit hash for 'sentence-transformers/all-MiniLM-L6-v2'.
+PMIC power reading works: 2.20 W right now
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 6673.05it/s]
+[repeat 1/3] IDLE 120 s  (do not touch the Pi)
+[repeat 1/3] ACTIVE 120 s
+PI POWER WINDOW: {'device': 'Raspberry Pi 5 (1 core)', 'method': 'EngraMesh detector (D3)', 'threads': 1, 'repeat': 1, 'idle_start': '2026-11-01 16:55:09', 'active_end': '2026-11-01 16:59:09', 'idle_power_W': 1.496, 'active_power_W': 3.389, 'samples_idle': 221, 'samples_active': 221, 'active_seconds': 120.13, 'entries': 1618, 'ms_per_entry': 74.2, 'energy_per_entry_J': 0.1406}
+[repeat 2/3] IDLE 120 s  (do not touch the Pi)
+[repeat 2/3] ACTIVE 120 s
+PI POWER WINDOW: {'device': 'Raspberry Pi 5 (1 core)', 'method': 'EngraMesh detector (D3)', 'threads': 1, 'repeat': 2, 'idle_start': '2026-11-01 16:59:09', 'active_end': '2026-11-01 17:03:09', 'idle_power_W': 1.5, 'active_power_W': 3.373, 'samples_idle': 222, 'samples_active': 222, 'active_seconds': 120.17, 'entries': 1621, 'ms_per_entry': 74.1, 'energy_per_entry_J': 0.1389}
+[repeat 3/3] IDLE 120 s  (do not touch the Pi)
+[repeat 3/3] ACTIVE 120 s
+PI POWER WINDOW: {'device': 'Raspberry Pi 5 (1 core)', 'method': 'EngraMesh detector (D3)', 'threads': 1, 'repeat': 3, 'idle_start': '2026-11-01 17:03:09', 'active_end': '2026-11-01 17:07:09', 'idle_power_W': 1.504, 'active_power_W': 3.387, 'samples_idle': 221, 'samples_active': 221, 'active_seconds': 120.08, 'entries': 1654, 'ms_per_entry': 72.6, 'energy_per_entry_J': 0.1367}
+SUMMARY: EngraMesh detector (D3) on Raspberry Pi 5 (1 core): energy per entry 0.139 +- 0.002 J over 3 repeats
+appended to pi_power_windows.csv and pi_power_samples.csv
+=== ALL DONE ===

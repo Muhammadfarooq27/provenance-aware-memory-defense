@@ -1,0 +1,5 @@
+device,method,power_source,runs,energy_per_entry_J_mean,energy_per_entry_J_std
+Laptop CPU (1 core),EngraMesh detector (D3),HWiNFO CPU package power,3,0.434,0.027
+Laptop CPU (1 core),LLM judge (qwen2.5:1.5b),HWiNFO CPU package power,3,22.539,1.657
+Raspberry Pi 5 (1 core),EngraMesh detector (D3),PMIC supply rails (vcgencmd pmic_read_adc),3,0.139,0.002
+Jetson Orin Nano (1 core),EngraMesh detector (D3),INA3221 VDD_IN (total module input),3,0.116,0.024

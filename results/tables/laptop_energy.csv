@@ -1,0 +1,7 @@
+method,idle_power_W,active_power_W,active_seconds,entries,energy_per_entry_J
+EngraMesh detector (D3),3.943,18.475,120.04,4335,0.4024
+LLM judge (qwen2.5:1.5b),3.005,11.111,122.67,41,24.2524
+EngraMesh detector (D3),2.619,18.525,120.06,4264,0.4479
+LLM judge (qwen2.5:1.5b),3.498,10.754,121.25,42,20.9456
+EngraMesh detector (D3),2.528,18.64,120.02,4287,0.4511
+LLM judge (qwen2.5:1.5b),2.542,10.414,122.46,43,22.4181
