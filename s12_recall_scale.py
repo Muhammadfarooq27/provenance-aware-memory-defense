@@ -1,7 +1,7 @@
 """STEP 12 - Does network-wide recall scale to bigger meshes?
 
 Same recall simulation as step 8 (same spread, use and detection rules),
-repeated for meshes of 25, 50 and 100 agents. We also count the RECALL
+repeated for meshes of 25, 50, 75 and 100 agents. We also count the RECALL
 messages: every agent that receives the recall forwards it once to each
 of its neighbours.
 
@@ -9,6 +9,7 @@ The 25-agent row should be close to step 8 (small differences come only
 from the random-number order).
 
 Output: results/tables/recall_scale.csv
+        results/logs/recall_scale_curves.csv (agents holding the entry at every step, for Fig. 3)
 Run:    python s12_recall_scale.py      (seconds to a few minutes)
 """
 import networkx as nx
@@ -17,7 +18,7 @@ import pandas as pd
 
 from config import LOGS, TABLES, SEEDS, MAIN_OVERLAP
 
-SIZES = [25, 50, 100]
+SIZES = [25, 50, 75, 100]
 T, SHARE, P_USE, RUNS = 30, 0.35, 0.15, 100        # T longer than step 8 so big meshes can finish
 runs_csv = pd.read_csv(LOGS / "detectors_all_runs.csv")
 MEASURED = runs_csv[(runs_csv.overlap == MAIN_OVERLAP) & runs_csv.variant.str.startswith("D3")].recall.mean()
@@ -29,6 +30,7 @@ def simulate(G, n, rng, use_recall, detect):
     holders, purged, front = {int(rng.integers(n))}, set(), set()
     detected_at = cleared_at = None
     peak = 1
+    curve = [1]                                           # holders at step 0, 1, 2, ... (recorded only, no extra random draws)
     for t in range(T):
         holders |= {b for a in holders for b in G.neighbors(a)
                     if b not in holders and b not in purged and rng.random() < SHARE}
@@ -45,10 +47,11 @@ def simulate(G, n, rng, use_recall, detect):
                 if not holders and cleared_at is None:
                     cleared_at = t
         peak = max(peak, len(holders))
+        curve.append(len(holders))
     messages = sum(G.degree(a) for a in purged)           # each reached agent forwards once
     return dict(detected_at=detected_at, peak_holders=peak, final_holders=len(holders),
                 steps_to_clear=(cleared_at - detected_at) if cleared_at is not None and detected_at is not None else np.nan,
-                recall_messages=messages if use_recall else 0)
+                recall_messages=messages if use_recall else 0, curve=curve)
 
 
 rows = []
@@ -63,6 +66,9 @@ for n in SIZES:
                 rows.append(dict(agents=n, mode=mode, seed=seed, **simulate(G, n, rng, use, d)))
     print("done", n, "agents")
 
+curves = [dict(agents=x["agents"], mode=x["mode"], seed=x["seed"], run=i, step=t, holders=h)
+          for i, x in enumerate(rows) for t, h in enumerate(x.pop("curve"))]
+pd.DataFrame(curves).to_csv(LOGS / "recall_scale_curves.csv", index=False)
 r = pd.DataFrame(rows)
 summ = r.groupby(["agents", "mode"], sort=False)[
     ["detected_at", "steps_to_clear", "peak_holders", "final_holders", "recall_messages"]].mean()

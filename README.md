@@ -28,7 +28,7 @@ provenance-aware-memory-defense/
 ├── s09_make_tables_figures.py # Step 9: Generates paper-ready LaTeX tables and figures
 ├── s10_two_thresholds.py      # Step 10: Evaluates three-way decision policy (accept, quarantine, recall)
 ├── s11_llm_paraphrase.py      # Step 11: Stress tests detectors against LLM-paraphrased poison entries
-├── s12_recall_scale.py        # Step 12: Evaluates network recall scaling across mesh sizes (25, 50, 100 agents)
+├── s12_recall_scale.py        # Step 12: Evaluates network recall scaling across mesh sizes (25, 50, 75, 100 agents)
 ├── s13_laundering.py          # Step 13: Tests resilience against provenance and network laundering attacks
 ├── s14_end_to_end.py          # Step 14: Runs end-to-end retrieval attack and defense evaluation with an LLM agent
 ├── s15_collect_all.py         # Step 15: Gathers summary outputs and prints consolidated results
@@ -39,6 +39,7 @@ provenance-aware-memory-defense/
 ├── s19b_laptop_energy.py      # Step 19b: Laptop energy per entry from the HWiNFO power log
 ├── s20_pi_power_window.py     # Step 20: Energy per entry on the Raspberry Pi 5 (on-board PMIC readings)
 ├── s21_jetson_power_window.py # Step 21: Energy per entry on the Jetson Orin Nano (on-board INA3221 sensor)
+├── s22_fig3_recall.py         # Step 22: Draws Fig. 3 (recall over time and at scale, 25-100 agents)
 ├── portable.py                # Portable copy of the D3 detector for devices with older Python/numpy
 ├── make_portable_model.py     # Exports the trained detector to .npz and rebuilds it on the device
 ├── edge/
@@ -111,6 +112,10 @@ Users download the datasets themselves into the expected folder paths:
   python s16_threshold_memshield.py
   python s17_llm_judge_memshield.py
   ```
+- Fig. 3 (recall over time and at scale) is drawn after step 12:
+  ```bash
+  python s22_fig3_recall.py
+  ```
 
 ### Edge measurements (Table 3)
 
@@ -153,7 +158,7 @@ All edge numbers use one CPU core per device.
 - `s09_make_tables_figures.py`: Turn the saved results into paper-ready LaTeX tables (table2.tex, table3.tex) and figures (fig2_detection, fig3_recall).
 - `s10_two_thresholds.py`: Test the three-way decision threshold policy (risk < t_low accept, t_low <= risk < t_high quarantine, risk >= t_high recall).
 - `s11_llm_paraphrase.py`: Stress test detector robustness against poison rewritten by a local LLM (qwen2.5:1.5b via Ollama) while preserving semantic meaning.
-- `s12_recall_scale.py`: Evaluate scalability of network-wide recall across mesh sizes of 25, 50, and 100 agents.
+- `s12_recall_scale.py`: Evaluate scalability of network-wide recall across mesh sizes of 25, 50, 75, and 100 agents; also saves the number of agents holding the entry at every step (`results/logs/recall_scale_curves.csv`).
 - `s13_laundering.py`: Test detector resilience against provenance and network laundering attacks where attackers rewrite poison as self-authored entries.
 - `s14_end_to_end.py`: End-to-end evaluation with a real LLM agent (qwen2.5:1.5b) testing attack success rate (ASR) and retrieval accuracy across defense configurations.
 - `s15_collect_all.py`: Print every final number in one place from saved result tables into results/FINAL_NUMBERS.txt.
@@ -164,6 +169,7 @@ All edge numbers use one CPU core per device.
 - `s19b_laptop_energy.py`: Computes laptop energy per entry from the HWiNFO CPU package power log and the step 19 windows.
 - `s20_pi_power_window.py`: Energy per entry on the Raspberry Pi 5 from the on-board PMIC readings (3 runs of 120 s).
 - `s21_jetson_power_window.py`: Energy per entry on the Jetson Orin Nano from the on-board INA3221 sensor (total module input, 3 runs of 120 s).
+- `s22_fig3_recall.py`: Draws Fig. 3 from the step 12 results: (a) share of agents holding a poisoned entry over time for 25, 50, 75, and 100 agents, and (b) peak share of infected agents per mesh size with the steps to clear.
 
 ## Results map
 
@@ -171,9 +177,10 @@ All edge numbers use one CPU core per device.
 - Table 3 (edge cost): latency, model size, envelope, and signing from `s07_edge_overhead.py` (`results/tables/table3_edge.csv`); peak memory from `s18_peak_memory.py` (`results/tables/peak_memory.csv`); energy from `s19_cpu_power_window.py` + `s19b_laptop_energy.py` (laptop), `s20_pi_power_window.py` (Raspberry Pi 5), and `s21_jetson_power_window.py` (Jetson Orin Nano), summarized in `results/tables/edge_energy_summary.csv`. All Table 3 numbers are listed in `results/EDGE_NUMBERS.txt`; raw power logs are in `results/edge/`.
 - Figures:
   - `results/figures/fig2_detection.pdf` and `results/figures/fig2_detection.png`: memshield-only F1 across overlap levels, saved by `s09_make_tables_figures.py`.
-  - `results/figures/fig3_recall.pdf` and `results/figures/fig3_recall.png`: agents holding poison over time, saved by `s09_make_tables_figures.py`.
+  - `results/figures/fig3_recall_column.pdf` and `results/figures/fig3_recall_column.png`: Fig. 3 of the paper, network-wide recall in meshes of 25, 50, 75, and 100 agents (over time and peak infection), saved by `s22_fig3_recall.py`.
+  - `results/figures/fig3_recall.pdf` and `results/figures/fig3_recall.png`: earlier version (25-agent mesh only), saved by `s09_make_tables_figures.py`.
   - `docs/framework_fig1.pdf`: framework architecture diagram (PNG at `docs/framework_fig1.png`).
-- Recall at 50/100 agents: `s12_recall_scale.py` (`results/tables/recall_scale.csv`).
+- Recall at 25/50/75/100 agents: `s12_recall_scale.py` (`results/tables/recall_scale.csv`, step-by-step curves in `results/logs/recall_scale_curves.csv`), plotted by `s22_fig3_recall.py`.
 - Paraphrase stress tests: `s06_stress_tests.py` (WordNet synonym substitutions), `s11_llm_paraphrase.py` (LLM rewrites, `results/tables/paraphrase_summary.csv`).
 - Laundering test: `s13_laundering.py` (`results/tables/laundering_summary.csv`).
 - Two thresholds: `s10_two_thresholds.py` (`results/tables/two_thresholds.csv`).

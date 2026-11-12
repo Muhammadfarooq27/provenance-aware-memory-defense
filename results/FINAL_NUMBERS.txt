@@ -95,16 +95,19 @@ RECALL (25 agents)
 RECALL AT SCALE
   (recall_scale.csv)
 ====================================================================================================
-   agents                          mode  detected_at  steps_to_clear  peak_holders  final_holders  recall_messages  peak_pct_of_mesh  messages_per_agent
-0      25                Without recall          NaN             NaN         25.00           25.0              0.0            100.00                 0.0
-1      25  With recall (detection 0.88)         1.44            1.73          3.61            0.0            100.0             14.43                 4.0
-2      25  With recall (detection 0.25)         3.11            2.65          8.60            0.0            100.0             34.39                 4.0
-3      50                Without recall          NaN             NaN         50.00           50.0              0.0            100.00                 0.0
-4      50  With recall (detection 0.88)         1.41            2.22          4.05            0.0            200.0              8.10                 4.0
-5      50  With recall (detection 0.25)         3.26            3.54         10.99            0.0            200.0             21.98                 4.0
-6     100                Without recall          NaN             NaN        100.00          100.0              0.0            100.00                 0.0
-7     100  With recall (detection 0.88)         1.43            2.72          4.93            0.0            400.0              4.93                 4.0
-8     100  With recall (detection 0.25)         3.03            4.06         13.49            0.0            400.0             13.49                 4.0
+    agents                          mode  detected_at  steps_to_clear  peak_holders  final_holders  recall_messages  peak_pct_of_mesh  messages_per_agent
+0       25                Without recall          NaN             NaN         25.00           25.0              0.0            100.00                 0.0
+1       25  With recall (detection 0.88)         1.44            1.73          3.61            0.0            100.0             14.43                 4.0
+2       25  With recall (detection 0.25)         3.11            2.65          8.60            0.0            100.0             34.39                 4.0
+3       50                Without recall          NaN             NaN         50.00           50.0              0.0            100.00                 0.0
+4       50  With recall (detection 0.88)         1.41            2.22          4.05            0.0            200.0              8.10                 4.0
+5       50  With recall (detection 0.25)         3.26            3.54         10.99            0.0            200.0             21.98                 4.0
+6       75                Without recall          NaN             NaN         75.00           75.0              0.0            100.00                 0.0
+7       75  With recall (detection 0.88)         1.42            2.44          4.36            0.0            300.0              5.82                 4.0
+8       75  With recall (detection 0.25)         3.06            3.89         11.58            0.0            300.0             15.43                 4.0
+9      100                Without recall          NaN             NaN        100.00          100.0              0.0            100.00                 0.0
+10     100  With recall (detection 0.88)         1.43            2.72          4.93            0.0            400.0              4.93                 4.0
+11     100  With recall (detection 0.25)         3.03            4.06         13.49            0.0            400.0             13.49                 4.0
 
 ====================================================================================================
 LAUNDERING
