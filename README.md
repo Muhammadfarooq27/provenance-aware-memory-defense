@@ -58,7 +58,7 @@ provenance-aware-memory-defense/
     ├── edge/                  # Raw power logs, measurement windows, and run outputs per device
     ├── tables/                # Experimental summary tables (.csv)
     ├── figures/               # Output figure plots (.pdf, .png)
-    └── logs/                  # Log outputs
+    └── logs/                  # Per-run logs (detector runs, stress tests, recall curves)
 ```
 
 ## Requirements
@@ -155,7 +155,7 @@ All edge numbers use one CPU core per device.
 - `s06_stress_tests.py`: Stress test against synonym replacement attacks by replacing ~25% of words in poisoned test texts with WordNet synonyms.
 - `s07_edge_overhead.py`: Measure edge device computational overhead: detector latency, model disk footprint, Ed25519 signing/verification time, and memory envelope size on 1 CPU core.
 - `s08_recall_sim.py`: Simulate network-wide recall propagation across the mesh with and without recall messages.
-- `s09_make_tables_figures.py`: Turn the saved results into paper-ready LaTeX tables (table2.tex, table3.tex) and figures (fig2_detection, fig3_recall).
+- `s09_make_tables_figures.py`: Turn the saved results into paper-ready LaTeX tables (table2.tex, table3.tex) and Fig. 2 (fig2_detection). It also draws an earlier single-mesh recall plot (fig3_recall); the paper's Fig. 3 is drawn by `s22_fig3_recall.py`.
 - `s10_two_thresholds.py`: Test the three-way decision threshold policy (risk < t_low accept, t_low <= risk < t_high quarantine, risk >= t_high recall).
 - `s11_llm_paraphrase.py`: Stress test detector robustness against poison rewritten by a local LLM (qwen2.5:1.5b via Ollama) while preserving semantic meaning.
 - `s12_recall_scale.py`: Evaluate scalability of network-wide recall across mesh sizes of 25, 50, 75, and 100 agents; also saves the number of agents holding the entry at every step (`results/logs/recall_scale_curves.csv`).
@@ -178,9 +178,10 @@ All edge numbers use one CPU core per device.
 - Figures:
   - `results/figures/fig2_detection.pdf` and `results/figures/fig2_detection.png`: memshield-only F1 across overlap levels, saved by `s09_make_tables_figures.py`.
   - `results/figures/fig3_recall_column.pdf` and `results/figures/fig3_recall_column.png`: Fig. 3 of the paper, network-wide recall in meshes of 25, 50, 75, and 100 agents (over time and peak infection), saved by `s22_fig3_recall.py`.
-  - `results/figures/fig3_recall.pdf` and `results/figures/fig3_recall.png`: earlier version (25-agent mesh only), saved by `s09_make_tables_figures.py`.
+  - `results/figures/fig3_recall_wide.pdf` and `results/figures/fig3_recall_wide.png`: the same Fig. 3 with the two parts side by side.
   - `docs/framework_fig1.pdf`: framework architecture diagram (PNG at `docs/framework_fig1.png`).
 - Recall at 25/50/75/100 agents: `s12_recall_scale.py` (`results/tables/recall_scale.csv`, step-by-step curves in `results/logs/recall_scale_curves.csv`), plotted by `s22_fig3_recall.py`.
+- Per-run logs in `results/logs/`: `detectors_all_runs.csv` (every detector run, all seeds and overlap levels), `synonym_runs.csv` and `synonym_examples.csv` (WordNet attack), `paraphrase_runs.csv` and `paraphrase_examples.csv` (LLM rewriting), `laundering_runs.csv` (laundering test), `recall_curves.csv` (25-agent recall over time, step 8), and `recall_scale_curves.csv` (25-100 agents, step 12).
 - Paraphrase stress tests: `s06_stress_tests.py` (WordNet synonym substitutions), `s11_llm_paraphrase.py` (LLM rewrites, `results/tables/paraphrase_summary.csv`).
 - Laundering test: `s13_laundering.py` (`results/tables/laundering_summary.csv`).
 - Two thresholds: `s10_two_thresholds.py` (`results/tables/two_thresholds.csv`).
